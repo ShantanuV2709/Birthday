@@ -1,15 +1,21 @@
+import os
+import sys
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import Request
+
+# Ensure local directories are in path for Vercel
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from routes import auth, guests
 from middleware.auth_middleware import auth_middleware
-from fastapi import Request
 
 app = FastAPI(title="Bday Form API (Google Sheets)")
 
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"], # In production, you might want to restrict this to your actual URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
