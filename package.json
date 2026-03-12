@@ -2,7 +2,8 @@
   "name": "birthday-monorepo",
   "private": true,
   "scripts": {
-    "build": "cd client && npm install && npm run build && cd .. && rm -rf public && mv client/dist public"
+    "build": "cd client && npm install && npm run build && cd .. && cp -r client/dist/* ."
   }
 }
+
 
