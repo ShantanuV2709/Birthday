@@ -19,7 +19,13 @@ const AdminLogin = () => {
       localStorage.setItem('token', response.data.access_token);
       navigate('/admin');
     } catch (err) {
-      setError('Invalid username or password');
+      if (!err.response) {
+        setError('Network error: Is the backend running?');
+      } else if (err.response.status === 401) {
+        setError('Invalid username or password');
+      } else {
+        setError('An unexpected error occurred. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
